@@ -9,20 +9,20 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
-           'gcr.io/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/nlp-api-image:${SHORT_SHA}', '.']
+           'gcr.io/$PROJECT_ID/nlp-api-image:${SHORT_SHA}', '.']
   # [END cloudbuild_python_image_yaml]
 
   # [START cloudbuild_python_push_yaml]
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push',  'gcr.io/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/nlp-api-image:${SHORT_SHA}']
+    args: ['push',  'gcr.io/$PROJECT_ID/nlp-api-image:${SHORT_SHA}']
   # [END cloudbuild_python_push_yaml]
   
   # [START cloudbuild_python_deploy_yaml]
   # Deploy to Cloud Run
   - name: google/cloud-sdk
     args: ['gcloud', 'run', 'deploy', 'helloworld-${SHORT_SHA}', 
-           '--image=gcr.io/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/nlp-api-image:${SHORT_SHA}', 
+           '--image=gcr.io/$PROJECT_ID/nlp-api-image:${SHORT_SHA}', 
            '--region', 'us-central1', '--platform', 'managed', 
            '--allow-unauthenticated']
   # [END cloudbuild_python_deploy_yaml]
