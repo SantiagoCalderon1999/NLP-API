@@ -1,0 +1,9 @@
+services:
+  language-api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    container_name: language_api
+    image: language_api:latest
+    ports:
+      - 5001:5000
