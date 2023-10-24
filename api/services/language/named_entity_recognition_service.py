@@ -1,6 +1,6 @@
-from flask import jsonify
 import spacy
 from models.language.named_entity_recognition_response import named_entity_recognition_response
+from models.language.entity_dto import entity_dto
 
 def analyze(text):
 
@@ -8,5 +8,7 @@ def analyze(text):
 
     analysis_results= NER(text)
     entities =analysis_results.ents
-    entityList  = [named_entity_recognition_response(entity.text, entity.label_, entity.start_char, entity.end_char) for entity in entities]
-    return jsonify(entitites=[e.serialize() for e in entityList])
+    entityList  = [entity_dto(entity.text, entity.label_, entity.start_char, entity.end_char) for entity in entities]
+    entitites_dto = [e.to_dict() for e in entityList]
+    response = named_entity_recognition_response(entitites_dto)
+    return response.to_dict()
