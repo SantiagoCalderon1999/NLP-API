@@ -1,4 +1,4 @@
-class NamedEntityRecognitionResponse:
+class named_entity_recognition_response:
     def __init__(self, text, label_, start_char, end_char):
         self.text = text
         self.label_ = label_
