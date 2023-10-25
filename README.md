@@ -30,3 +30,7 @@ $ pip install -r requirements.txt
 $ pip install -r requirements.txt
 ```
 
+
+## Deployment
+
+This repo includes a CD pipeline in Cloud Build, which deploys the API to Cloud Run. The service can be consumed using the following url: https://nlp-api-h4zydlqkdq-uc.a.run.app/
