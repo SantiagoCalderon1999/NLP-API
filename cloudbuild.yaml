@@ -21,9 +21,15 @@ steps:
   
   # [START cloudbuild_python_deploy_yaml]
   # Deploy to Cloud Run
-  - name: google/cloud-sdk
-    args: ['gcloud', 'run', 'deploy', 'helloworld-${SHORT_SHA}', 
-           '--image=gcr.io/$PROJECT_ID/nlp-api-image:${SHORT_SHA}', 
-           '--region', 'us-central1', '--platform', 'managed', 
-           '--allow-unauthenticated']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'nlp-api'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/nlp-api-image:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1'
   # [END cloudbuild_python_deploy_yaml]
