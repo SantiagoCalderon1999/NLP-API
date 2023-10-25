@@ -1,4 +1,4 @@
-class named_entity_recognition_response:
+class analyze_named_entity_recognition_response:
     def __init__(self, entitites):
         self.entities = entitites
     

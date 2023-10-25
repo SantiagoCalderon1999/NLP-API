@@ -1,18 +1,20 @@
 from flask import request, jsonify
 from services.language import named_entity_recognition_service
+from models.language.analyze_named_entity_recognition_request import analyze_named_entity_recognition_request
 from flask_restx import Resource, Namespace, fields
 
-language_routes = Namespace(name= "language/ner", description= "Detects and categorizes named entities")
+namespace = Namespace(name = "Named Entity Recognition", 
+                            path= "/language/ner", 
+                            description= "Detects and categorizes named entities")
 
-request_fields = language_routes.model('request', {
-                'text': fields.String(description='Text that you want to analyze', required=True),
-})
+request_fields = namespace.model(analyze_named_entity_recognition_request.__name__, 
+                                 analyze_named_entity_recognition_request().text)
 
-@language_routes.route('/analyze')
+@namespace.route('/analyze')
 class Language_routes(Resource):
     
-    @language_routes.doc(responses={200: 'Ok'})
-    @language_routes.doc(body=request_fields)
+    @namespace.doc(responses={200: 'Ok'})
+    @namespace.doc(body=request_fields)
     def post(self):
         text = request.json['text']
         return jsonify(named_entity_recognition_service.analyze(text))
