@@ -1,6 +1,4 @@
-FROM python:3.11.0-alpine AS base
-
-RUN apk update && apk add build-base
+FROM python:latest
 
 WORKDIR /api
 ADD ./api /api
