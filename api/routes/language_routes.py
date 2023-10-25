@@ -1,6 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import request, jsonify
 from services.language import named_entity_recognition_service
-from flask_restx import Api, Resource, Namespace, fields
+from flask_restx import Resource, Namespace, fields
 
 language_routes = Namespace(name= "language/ner", description= "Detects and categorizes named entities")
 
