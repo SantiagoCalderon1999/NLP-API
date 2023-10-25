@@ -1,9 +1,10 @@
 steps:
+  # [START cloudbuild_python_dependencies_yaml]
   # Install dependencies
   - name: python
     entrypoint: pip
     args: ["install", "-r", "api/requirements.txt"]
-# [END cloudbuild_python_dependencies_yaml]
+  # [END cloudbuild_python_dependencies_yaml]
 
   # [START cloudbuild_python_image_yaml]
   # Docker Build
