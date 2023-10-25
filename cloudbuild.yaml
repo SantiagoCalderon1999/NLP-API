@@ -10,13 +10,13 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
-           'gcr.io/$PROJECT_ID/nlp-api-image:$COMMIT_SHA', '.']
+           'gcr.io/$PROJECT_ID/$_IMAGE:$COMMIT_SHA', '.']
   # [END cloudbuild_python_image_yaml]
 
   # [START cloudbuild_python_push_yaml]
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push',  'gcr.io/$PROJECT_ID/nlp-api-image:$COMMIT_SHA']
+    args: ['push',  'gcr.io/$PROJECT_ID/$_IMAGE:$COMMIT_SHA']
   # [END cloudbuild_python_push_yaml]
   
   # [START cloudbuild_python_deploy_yaml]
@@ -27,11 +27,13 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'nlp-api'
+      - '$_RESOURCE_NAME'
       - '--image'
-      - 'gcr.io/$PROJECT_ID/nlp-api-image:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/$_IMAGE:$COMMIT_SHA'
       - '--region'
-      - 'us-central1'
+      - '$_REGION'
+      - '--port'
+      - '$_PORT'
   # [END cloudbuild_python_deploy_yaml]
 images:
-  - 'gcr.io/$PROJECT_ID/nlp-api-image:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/$_IMAGE:$COMMIT_SHA'
