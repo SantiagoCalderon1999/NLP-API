@@ -11,7 +11,7 @@ blueprint = Blueprint('api', __name__)
 
 api = Api(
     blueprint,
-    title='Natural Language Processing API',
+    title='Natural Language Processing (NLP) API',
     version='1.0',
     description='API leveraging Natural Language Processing',
 )
