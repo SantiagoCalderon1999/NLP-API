@@ -1,13 +1,13 @@
 import spacy
-from models.language.analyze_named_entity_recognition_response import analyze_named_entity_recognition_response
-from models.language.entity import entity
+from models.language.ner.analyze_ner_response import AnalyzeNerResponse
+from models.language.ner.ner_entity import NerEntity
 
 def analyze(text):
-    NER = spacy.load("en_core_web_sm")
-    analysis_results= NER(text)
+    nlp = spacy.load("en_core_web_sm")
+    analysis_results= nlp(text)
     analyzed_entities =analysis_results.ents
     
-    entity_list  = [entity(analyzed_entity) for analyzed_entity in analyzed_entities]
+    entity_list  = [NerEntity(analyzed_entity) for analyzed_entity in analyzed_entities]
     entitites_dict = [e.to_dict() for e in entity_list]
-    response = analyze_named_entity_recognition_response(entitites_dict)
+    response = AnalyzeNerResponse(entitites_dict)
     return response.to_dict()

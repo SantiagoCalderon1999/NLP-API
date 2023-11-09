@@ -1,4 +1,4 @@
-class entity:
+class NerEntity:
     def __init__(self, analyzed_entity):
         self.text = analyzed_entity.text
         self.label_ = analyzed_entity.label_
